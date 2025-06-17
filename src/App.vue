@@ -1,6 +1,9 @@
 <script setup>
-import NavBar from "./components/navBar.vue";
+import NavBar from "./components/NavBar.vue";
 import DatosPersonales from "./components/DatosPersonales.vue";
+import ServiciosContainer from "./components/ServiciosContainer.vue";
+import ResumenContainer from "./components/ResumenContainer.vue";
+import ProyectosContainer from "./components/ProyectosContainer.vue";
 </script>
 
 <template>
@@ -9,12 +12,14 @@ import DatosPersonales from "./components/DatosPersonales.vue";
     <NavBar />
   </header>
   <main>
+    <!-- home section -->
     <section class="home" id="home"><DatosPersonales /></section>
-    <section id="educacion"><h2>Educacion - Cursos</h2></section>
-    <section id="experiencia"><h2>Experiencia</h2></section>
-    <section id="proyectos"><h2>Proyectos</h2></section>
-    <section id="habilidades"><h2>Habilidades</h2></section>
-    <section id="intereses"><h2>Intereses</h2></section>
+    <!-- servicios section -->
+    <section class="servicios" id="servicios"><ServiciosContainer /></section>
+    <!-- resumen section -->
+    <section class="resumen" id="resumen"><ResumenContainer /></section>
+    <!-- proyectos section -->
+    <section class="proyectos active" id="proyectos"><ProyectosContainer /></section>
   </main>
 </template>
 
@@ -33,16 +38,29 @@ import DatosPersonales from "./components/DatosPersonales.vue";
 }
 
 section {
-  min-height: 100vh;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   padding: 10rem 9% 2rem;
+  background: var(--bg-color);
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
 }
 
+section.active {
+  visibility: visible;
+  opacity: 1;
+  overflow: auto;
+}
 .home {
+  width: 100vw; /* Ocupa todo el ancho de la pantalla */
+  max-width: 100vw; /* Evita que se limite por algún padre */
+  overflow-x: hidden;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 9%;
-  background: url("../assets/home.png") no-repeat;
-  background-size: cover;
-  background-position: center;
+  gap: 5rem;
 }
 </style>

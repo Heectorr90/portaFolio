@@ -37,25 +37,31 @@ const redesSociales = [
     <br />
     <div class="btn-box">
       <a href="#" class="btn"> CV </a>
-      <a href="#" class="btn"> Contactame </a>
+      <div class="home-sci">
+        <a
+          v-for="red in redesSociales"
+          :key="red.name"
+          :href="red.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <component :is="red.icon" class="w-6 h-6" />
+        </a>
+      </div>
     </div>
   </div>
-  <div class="home-sci">
-    <a
-      v-for="red in redesSociales"
-      :key="red.name"
-      :href="red.url"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <component :is="red.icon" class="w-6 h-6" />
-    </a>
+  <div class="home-img">
+    <div class="img-box">
+      <div class="img-item">
+        <img src="../assets/home-foto.png" />
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .home-content {
-  max-width: 60rem;
+  flex: 1.2;
 }
 .home-content h1 {
   font-size: 5.6rem;
@@ -77,14 +83,12 @@ const redesSociales = [
   line-height: 2.4rem 0 4rem;
 }
 .btn-box {
-  position: relative;
   display: flex;
   justify-content: space-between;
   width: 34.5rem;
   height: 5rem;
 }
-
-.btn-box .btn {
+.btn {
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -103,24 +107,11 @@ const redesSociales = [
   transition: 0.5s;
 }
 
-.btn-box .btn:hover {
+.btn:hover {
   color: var(--main-color);
   background: transparent;
 }
-
-.btn-box .btn:nth-child(2) {
-  color: var(--main-color);
-  background: transparent;
-}
-
-.btn-box .btn:nth-child(2):hover {
-  color: var(--bg-color);
-  background: transparent;
-}
-.btn-box .btn:nth-child(2)::before {
-  background: var(--main-color);
-}
-.btn-box .btn::before {
+.btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -134,10 +125,11 @@ const redesSociales = [
 .btn-box .btn:hover::before {
   width: 100%;
 }
-
 .home-sci {
-  position: absolute;
-  bottom: 4rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-left: 2rem;
   width: 170px;
   display: flex;
   justify-content: space-between;
@@ -175,5 +167,56 @@ const redesSociales = [
 }
 .home-sci a:hover::before {
   width: 100%;
+}
+
+.home-img .img-box {
+  flex: 0.8;
+  position: relative;
+  width: 32vw;
+  height: 32vw;
+  border-radius: 50%;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.home-img .img-box::before,
+.home-img .img-box::after {
+  content: "";
+  position: absolute;
+  width: 50rem;
+  height: 50rem;
+  background: conic-gradient(transparent, transparent, transparent, var(--main-color));
+  transform: rotate(0deg);
+  animation: rotate-border 10s linear infinite;
+}
+.home-img .img-box::after {
+  animation-delay: -5s;
+}
+@keyframes rotate-border {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.home-img .img-box .img-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  border: 0.01rem solid var(--bg-color);
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  overflow: hidden;
+}
+.home-img .img-box .img-item img {
+  position: absolute;
+  top: 3rem;
+  display: block;
+  width: 85%;
+  object-fit: cover;
+  mix-blend-mode: lighten;
 }
 </style>

@@ -2,10 +2,10 @@
 import IconMenu from "./icons/IconMenu.vue";
 import { ref } from "vue";
 const navegacion = ref([
-  { id: 1, name: "Educacion", href: "#educacion" },
-  { id: 2, name: "Experiencia", href: "#experiencia" },
+  { id: 1, name: "Servicios", href: "#servicios" },
+  { id: 2, name: "Resumen", href: "#resumen" },
   { id: 3, name: "Proyectos", href: "#proyectos" },
-  { id: 4, name: "Habilidades", href: "#habilidades" },
+  { id: 4, name: "Contacto", href: "#contacto" },
 ]);
 </script>
 
