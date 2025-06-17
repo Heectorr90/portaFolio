@@ -53,7 +53,7 @@ const redesSociales = [
   <div class="home-img">
     <div class="img-box">
       <div class="img-item">
-        <img src="../assets/home-foto.png" />
+        <img src="../assets/img/home-foto.png" />
       </div>
     </div>
   </div>

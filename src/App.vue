@@ -4,22 +4,34 @@ import DatosPersonales from "./components/DatosPersonales.vue";
 import ServiciosContainer from "./components/ServiciosContainer.vue";
 import ResumenContainer from "./components/ResumenContainer.vue";
 import ProyectosContainer from "./components/ProyectosContainer.vue";
+import ContactoContainer from "./components/ContactoContainer.vue";
+import { ref } from "vue";
+
+const activeSection = ref("home");
+
+const sections = [
+  { id: "home", component: DatosPersonales },
+  { id: "servicios", component: ServiciosContainer },
+  { id: "resumen", component: ResumenContainer },
+  { id: "proyectos", component: ProyectosContainer },
+  { id: "contacto", component: ContactoContainer },
+];
 </script>
 
 <template>
   <header class="header">
     <!-- Barra de Navegación -->
-    <NavBar />
+    <NavBar :active="activeSection" @navigate="(id) => (activeSection = id)" />
   </header>
   <main>
-    <!-- home section -->
-    <section class="home" id="home"><DatosPersonales /></section>
-    <!-- servicios section -->
-    <section class="servicios" id="servicios"><ServiciosContainer /></section>
-    <!-- resumen section -->
-    <section class="resumen" id="resumen"><ResumenContainer /></section>
-    <!-- proyectos section -->
-    <section class="proyectos active" id="proyectos"><ProyectosContainer /></section>
+    <section
+      v-for="s in sections"
+      :key="s.id"
+      :id="s.id"
+      :class="[s.id, { active: activeSection === s.id }]"
+    >
+      <component :is="s.component" />
+    </section>
   </main>
 </template>
 

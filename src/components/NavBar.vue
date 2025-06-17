@@ -1,24 +1,35 @@
 <script setup>
 import IconMenu from "./icons/IconMenu.vue";
-import { ref } from "vue";
-const navegacion = ref([
-  { id: 1, name: "Servicios", href: "#servicios" },
-  { id: 2, name: "Resumen", href: "#resumen" },
-  { id: 3, name: "Proyectos", href: "#proyectos" },
-  { id: 4, name: "Contacto", href: "#contacto" },
-]);
+import { defineProps, defineEmits } from "vue";
+const props = defineProps({ active: String });
+const emit = defineEmits(["navigate"]);
+
+const navegacion = [
+  { id: "home", name: "Home" },
+  { id: "servicios", name: "Servicios" },
+  { id: "resumen", name: "Resumen" },
+  { id: "proyectos", name: "Proyectos" },
+  { id: "contacto", name: "Contacto" },
+];
+
+function navegar(id) {
+  emit("navigate", id);
+}
 </script>
 
 <template>
-  <a href="#" class="logo">Hector.</a>
-  <div class="menu-icon">
-    <IconMenu />
-  </div>
+  <a href="#" class="logo" @click.prevent="navegar('home')">Hector.</a>
+  <div class="menu-icon"><IconMenu /></div>
   <nav class="navbar">
-    <a href="#" class="active">Home</a>
-    <a v-for="nav in navegacion" :key="nav.id" :href="nav.href" class="navbar item">{{
-      nav.name
-    }}</a>
+    <a
+      v-for="nav in navegacion"
+      :key="nav.id"
+      href="#"
+      :class="{ active: nav.id === active }"
+      @click.prevent="navegar(nav.id)"
+    >
+      {{ nav.name }}
+    </a>
   </nav>
 </template>
 
